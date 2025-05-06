@@ -6,9 +6,13 @@ from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
 logger = get_logger(__name__)
 
 import os
-os.environ['HUGGINGFACEHUB_API_TOKEN'] = os.environ['HF_KEY']
-
-
+if os.getenv('USER', "None") == 'appuser': # streamlit
+    ht_token = st.secrets['HF_KEY']
+    os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_token
+else:
+    # ALSO ADD HERE YOUR PROXY VARS
+    os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.environ["HF_KEY"]
+    
 st.title("my Gen AI App")
 repo_id = "microsoft/Phi-3-mini-4k-instruct"
 temp = 1
