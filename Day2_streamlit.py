@@ -6,7 +6,7 @@ from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
 logger = get_logger(__name__)
 
 import os
-if os.getenv('USER', "None") == 'appuser': # streamlit
+if os.getenv('USER', "None") == 'appuser':
     ht_token = st.secrets['HF_KEY']
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_token
 else:
